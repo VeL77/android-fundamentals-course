@@ -44,7 +44,7 @@ public class ForecastFragment extends Fragment {
                 .permitAll().build();
         StrictMode.setThreadPolicy(policy);
         String data = getForecast();
-        List<Forecast> forecast = parseForecast(data);
+        final List<Forecast> forecast = parseForecast(data);
 
 
         final ForecastAdapter adapter = new ForecastAdapter(inflater, forecast);
@@ -54,10 +54,10 @@ public class ForecastFragment extends Fragment {
         collection.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Forecast item = (Forecast) adapter.getItem(position);
+                //Forecast item = (Forecast) adapter.getItem(position);
                 Intent intent = new Intent(getActivity(), DayForecast.class);
-                intent.putExtra("TIMESTAMP", item.timestamp);
-                intent.putExtra(Intent.EXTRA_TEXT, item.desc);
+                intent.putExtra("TIMESTAMP", forecast.get(position).timestamp);
+                intent.putExtra("Desc", forecast.get(position).desc);
                 startActivity(intent);
 
             }

@@ -4,14 +4,51 @@ import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.TextView;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
+import org.w3c.dom.Text;
 
 
 public class DayForecast extends ActionBarActivity {
+
+    private TextView displayDate;
+    private TextView displayDesc;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_day_forecast);
+        Bundle dayForcastDataInfo = getIntent().getExtras();
+
+        long timestamp = getIntent().getLongExtra("TIMESTAMP", 0);
+        String timestampDisplay = SimpleDateFormat.getDateInstance().format(new Date(timestamp*1000));
+        String desc = getIntent().getStringExtra("Desc");
+
+        //Bundle dayForcastDataInfo = getIntent().getExtras();
+
+
+
+        displayDate = (TextView) findViewById(R.id.textDate);
+        displayDesc = (TextView) findViewById(R.id.textDesc);
+
+        if(timestampDisplay==null){
+            return;
+        }
+        else{
+            displayDate.setText(timestampDisplay);
+        }
+
+        if(desc==null){
+            return;
+        }
+        else{
+            displayDesc.setText(desc);
+        }
+
+
     }
 
 
